@@ -27,6 +27,7 @@ Now we have the extension installed, and you don't need to repeat these steps un
 4- Click the "Start" button
 5- Wait until you see the green message in the extension indicating that the tasks were successfully completed.
 
+***
 
 ### Español:
 
