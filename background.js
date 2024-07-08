@@ -1,6 +1,6 @@
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === 'startProcessing') {
-    const urls = message.urls;
+    let urls = message.urls.map(normalizeUrl);
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       const tabId = tabs[0].id;
       processUrls(urls, tabId);
@@ -9,6 +9,20 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     processUrls(message.urls, message.tabId);
   }
 });
+
+function normalizeUrl(url) {
+  const baseUrl = 'https://www.linkedin.com/in/';
+  if (url.startsWith(baseUrl)) {
+    const endIdx = url.indexOf('?');
+    if (endIdx !== -1) {
+      url = url.substring(0, endIdx);
+    }
+    if (!url.endsWith('/details/skills/')) {
+      url = url.replace(/\/$/, '') + '/details/skills/';
+    }
+  }
+  return url;
+}
 
 function processUrls(urls, tabId) {
   if (urls.length === 0) {
@@ -48,7 +62,7 @@ function simulatePageDownAndClick(urls, tabId) {
     var spans = document.querySelectorAll('span.artdeco-button__text');
 
     spans.forEach(function(span) {
-      if (span.textContent.trim() === 'Endorse') {
+      if (span.textContent.trim() === 'Endorse' || span.textContent.trim() === 'Validar') {
         span.click();
       }
     });
