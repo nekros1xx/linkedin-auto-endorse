@@ -6,16 +6,5 @@ document.getElementById('start').addEventListener('click', () => {
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === 'tasksCompleted') {
     document.getElementById('message').textContent = 'Tarea realizada con éxito';
-
-    chrome.runtime.onInstalled.addListener(() => {
-      chrome.notifications.create('end-notification', {
-        type: 'basic',
-        iconUrl: 'icon.png',
-        title: 'Verification completed',
-        message: 'LinkedIn verification is complete',
-        priority: 2
-      });
-    });
-    
   }
 });
