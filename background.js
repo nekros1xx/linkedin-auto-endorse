@@ -11,14 +11,17 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 
 function normalizeUrl(url) {
-  const baseUrl = 'https://www.linkedin.com/in/';
-  if (url.startsWith(baseUrl)) {
-    const endIdx = url.indexOf('?');
-    if (endIdx !== -1) {
-      url = url.substring(0, endIdx);
-    }
-    if (!url.endsWith('/details/skills/')) {
-      url = url.replace(/\/$/, '') + '/details/skills/';
+  const baseUrls = ['https://www.linkedin.com/in/', 'https://linkedin.com/in/'];
+  for (let baseUrl of baseUrls) {
+    if (url.startsWith(baseUrl)) {
+      const endIdx = url.indexOf('?');
+      if (endIdx !== -1) {
+        url = url.substring(0, endIdx);
+      }
+      if (!url.endsWith('/details/skills/')) {
+        url = url.replace(/\/$/, '') + '/details/skills/';
+      }
+      return url;
     }
   }
   return url;
@@ -52,13 +55,13 @@ function simulatePageDownAndClick(urls, tabId) {
       window.scrollBy(0, window.innerHeight);
       setTimeout(() => {
         pressPageDown(times - 1, callback);
-      }, 500);
+      }, 200);
     } else {
       callback();
     }
   }
 
-  pressPageDown(15, () => {
+  pressPageDown(30, () => {
     var spans = document.querySelectorAll('span.artdeco-button__text');
 
     spans.forEach(function(span) {
