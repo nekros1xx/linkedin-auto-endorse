@@ -7,6 +7,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     });
   } else if (message.action === 'continueProcessing') {
     processUrls(message.urls, message.tabId);
+  } else if (message.action === 'tasksCompleted') {
+    chrome.notifications.create({
+      type: 'basic',
+      iconUrl: 'icon.png',
+      title: 'Verification completed',
+      message: 'LinkedIn verification is complete'
+    });
   }
 });
 
@@ -75,6 +82,7 @@ function simulatePageDownAndClick(urls, tabId) {
         chrome.runtime.sendMessage({ action: 'continueProcessing', urls: urls, tabId: tabId });
       } else {
         console.log("Procesamiento completado, mostrando alerta");
+
         chrome.runtime.sendMessage({ action: 'tasksCompleted' });
       }
     }, 2000);
