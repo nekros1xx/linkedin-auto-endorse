@@ -33,7 +33,7 @@ Now we have the extension installed, and you don't need to repeat these steps un
 
 4- Click the "Start" button
 
-5- Wait until you see the green message in the extension indicating that the tasks were successfully completed.
+5- Wait until you get the browser notification indicating that the tasks were successfully completed.
 
 ***
 
@@ -72,5 +72,5 @@ Ahora tenemos la extensión instalada y no es necesario repetir estos pasos a me
 
 4- Clickea el botón "Start"
 
-5- Espera hasta que veas en la extensión el mensaje en verde que dice que las tareas se realizaron con éxito.
+5- Espera hasta que te avise por medio de una notificación que las tareas se realizaron con éxito.
 
